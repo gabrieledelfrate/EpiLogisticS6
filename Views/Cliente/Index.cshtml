@@ -1,0 +1,58 @@
+﻿@model List<EpiLogistic.Models.ClienteModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Elenco Clienti</h2>
+
+@using (Html.BeginForm("Details", "Cliente", FormMethod.Get))
+{
+    <div class="form-group">
+        <label for="searchInput">Ricerca per Codice Fiscale o Partita IVA:</label>
+        <input type="text" name="searchInput" class="form-control" />
+
+        <div class="form-check">
+            <input type="checkbox" name="isAzienda" class="form-check-input" />
+            <label class="form-check-label" for="isAzienda">Ricerca solo aziende</label>
+        </div>
+
+        <input type="submit" value="Cerca" class="btn btn-primary" />
+    </div>
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>Codice Fiscale</th>
+        <th>Partita IVA</th>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Città</th>
+        <th>Indirizzo</th>
+        <th>CAP</th>
+        <th>Email</th>
+        <th>Telefono</th>
+        <th>Azioni</th>
+    </tr>
+
+    @foreach (var cliente in Model)
+    {
+        <tr>
+            <td>@cliente.CodiceFiscale</td>
+            <td>@cliente.PartitaIva</td>
+            <td>@cliente.Nome</td>
+            <td>@cliente.Cognome</td>
+            <td>@cliente.Citta</td>
+            <td>@cliente.Indirizzo</td>
+            <td>@cliente.CAP</td>
+            <td>@cliente.Email</td>
+            <td>@cliente.Telefono</td>
+            <td>
+                @Html.ActionLink("Modifica", "Edit", new { id = cliente.Id }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Cancella", "Delete", new { id = cliente.Id }, new { @class = "btn btn-danger", onclick = "return confirm('Sei sicuro di voler cancellare questo cliente?');" })
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h3>Clienti</h3>
+    @Html.ActionLink("Lista Clienti", "Index", "Cliente")
+    @Html.ActionLink("Aggiungi Cliente", "Create", "Cliente")
+</div>
+
+<div>
+    <h3>Spedizioni</h3>
+    @Html.ActionLink("Registra Spedizione", "Create", "Spedizione")
+    <!-- Aggiungi altri link per le azioni Spedizione -->
+</div>
+
+<div>
+    <h3>Aggiornamenti Spedizione</h3>
+    @Html.ActionLink("Registra Aggiornamento", "Create", "AggiornamentoSpedizione")
+    <!-- Aggiungi altri link per le azioni AggiornamentoSpedizione -->
+</div>

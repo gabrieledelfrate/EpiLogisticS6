@@ -6,7 +6,7 @@ using System.Web;
 
 namespace EpiLogistic.Models
 {
-    public class Spedizione
+    public class SpedizioneModel
     {
         public int Id { get; set; }
 
