@@ -14,11 +14,11 @@
 <div>
     <h3>Spedizioni</h3>
     @Html.ActionLink("Registra Spedizione", "Create", "Spedizione")
-    <!-- Aggiungi altri link per le azioni Spedizione -->
+    @Html.ActionLink("Lista Spedizioni", "Index", "Spedizione")   
 </div>
 
 <div>
     <h3>Aggiornamenti Spedizione</h3>
     @Html.ActionLink("Registra Aggiornamento", "Create", "AggiornamentoSpedizione")
-    <!-- Aggiungi altri link per le azioni AggiornamentoSpedizione -->
+    @Html.ActionLink("Spedizioni In Transito", "Index", "AggiornamentoSpedizione")
 </div>

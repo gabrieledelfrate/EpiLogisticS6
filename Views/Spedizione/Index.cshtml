@@ -1,0 +1,34 @@
+﻿@model List<EpiLogistic.Models.SpedizioneModel>
+
+@{
+    ViewBag.Title = "Spedizioni";
+}
+
+<h2>Elenco Spedizioni</h2>
+
+<table class="table">
+    <tr>
+        <th>Numero Identificativo</th>
+        <th>Data Spedizione</th>
+        <th>Peso</th>
+        <th>Città Destinataria</th>
+        <th>Indirizzo Destinatario</th>
+        <th>Nominativo Destinatario</th>
+        <th>Costo</th>
+        <th>Data Consegna Prevista</th>
+    </tr>
+
+    @foreach (var spedizione in Model)
+    {
+        <tr>
+            <td>@spedizione.NumeroIdentificativo</td>
+            <td>@spedizione.DataSpedizione.ToShortDateString()</td>
+            <td>@spedizione.Peso</td>
+            <td>@spedizione.CittaDestinataria</td>
+            <td>@spedizione.IndirizzoDestinatario</td>
+            <td>@spedizione.NominativoDestinatario</td>
+            <td>@spedizione.Costo</td>
+            <td>@spedizione.DataConsegnaPrevista.ToShortDateString()</td>
+        </tr>
+    }
+</table>

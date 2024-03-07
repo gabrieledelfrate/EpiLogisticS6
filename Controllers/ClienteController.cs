@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Web.Mvc;
@@ -78,12 +79,20 @@ namespace EpiLogistic.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (cliente.IsAzienda)
+                {
+                    // Imposta PartitaIva a null se IsAzienda è selezionato
+                    cliente.PartitaIva = null;
+                }
+
                 UpdateClienteInDatabase(cliente);
                 return RedirectToAction("Index");
             }
 
             return View(cliente);
         }
+
+
 
         // GET: Cliente/Delete/5
         public ActionResult Delete(int id)
@@ -153,15 +162,11 @@ namespace EpiLogistic.Controllers
             {
                 connection.Open();
 
-                string query = "SELECT * FROM Clienti WHERE CodiceFiscale = @SearchInput";
+                string query = "SELECT * FROM Clienti WHERE (CodiceFiscale = @SearchInput OR PartitaIva = @SearchInput)";
 
                 if (isAzienda.HasValue && isAzienda.Value)
                 {
-                    query = "SELECT * FROM Clienti WHERE IsAzienda = 1 AND PartitaIva = @SearchInput";
-                }
-                else
-                {
-                    query += " OR PartitaIva = @SearchInput AND (IsAzienda = 0 OR IsAzienda IS NULL)";
+                    query += " AND IsAzienda = 1";
                 }
 
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -193,6 +198,7 @@ namespace EpiLogistic.Controllers
 
             return cliente;
         }
+
 
 
         private ClienteModel GetClienteById(int id)
@@ -287,6 +293,8 @@ namespace EpiLogistic.Controllers
                 }
             }
         }
+
+
 
         private void DeleteClienteFromDatabase(int id)
         {
