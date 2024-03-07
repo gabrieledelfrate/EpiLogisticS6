@@ -1,7 +1,39 @@
-﻿
+﻿@model List<EpiLogistic.Models.AggiornamentoSpedizioneModel>
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Aggiornamenti Spedizione";
 }
 
-<h2>Index</h2>
+<h2>Aggiornamenti Spedizione</h2>
 
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Stato</th>
+            <th>Luogo</th>
+            <th>Descrizione</th>
+            <th>Data/Ora Aggiornamento</th>
+        </tr>
+
+        @foreach (var aggiornamento in Model)
+        {
+            <tr>
+                <td>@aggiornamento.Id</td>
+                <td>@aggiornamento.Stato</td>
+                <td>@aggiornamento.Luogo</td>
+                <td>@aggiornamento.Descrizione</td>
+                <td>@aggiornamento.DataOraAggiornamento</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>Nessun aggiornamento disponibile.</p>
+}
+
+<p>
+    @Html.ActionLink("Torna alla Lista di Spedizioni", "Index", "Spedizione")
+</p>
